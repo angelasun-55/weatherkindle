@@ -218,26 +218,9 @@
 
             _sunriseHour = sunrise.hour();
             _sunsetHour = sunset.hour();
-            
-            var windSpeed = data.wind.speed;
-            var windString = "no idea";
 
-            if (windSpeed < 6) {
-                windString = "light to no wind";
-            } else if (windSpeed < 8) {
-                windString = "small wind";
-            } else if (windSpeed < 10) {
-                windString = " kite weather";
-            } else if (windSpeed < 16) {
-                windString = "very strong wind";
-            } else {
-                windString = "huge wind omg die";
-            }
             sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-                    + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat) +"end of sun";
-            Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-                    + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
-            Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
+                    + "&nbsp;&nbsp;<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
             //  alert(data.name);
             setNightMode();
             setMoonIconsRotation(data.coord.lat)
@@ -303,8 +286,6 @@
         var date = null;
         var sun = null;
         var lang = null;
-        var Angie1 = null;
-        var Angie2 = null;
 
         var forecastsCells = null;
 
@@ -459,8 +440,6 @@
             lastUpdate = document.getElementById("lastUpdate");
             date = document.getElementById("date");
             sun = document.getElementById("sun");
-            Angie1 = document.getElementById("AngiesStuff");
-            Angie2 = document.getElementById("AngiesStuff2");
 
             forecastsCells = [];
             for (var i = 0; i < forecastCount; i++) {
@@ -608,7 +587,6 @@
         <!--<i class="celsius wi wi-celsius"></i>-->
     </div>
     <div id="description"></div>
-    <div id="AngiesStuff">hi This is Angie1</div>
     <div id="lastUpdate"></div>
     <div class="forecast">
         <div class="col col1">
@@ -644,7 +622,7 @@
     </div>
     <div id="date"></div>
     <div id="sun"></div>
-    <div id="AngiesStuff2">hi This is Angie2</div>
+    <div id="AngiesStuff">hi This is Angie</div>
 </div>
 <div id="cleaner"></div>
 </body>
