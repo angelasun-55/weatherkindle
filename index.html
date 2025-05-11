@@ -263,7 +263,7 @@
             temp.innerHTML = feelsLike ? "fl " + Math.round(data.main.feels_like): Math.round(data.main.temp);
             temp.className = feelsLike ? "feelsLike" : "";
             city.innerHTML = data.name;
-            description.innerHTML = data.weather[0].description  + ", actual temp: " + Math.round(data.main.temp);
+            description.innerHTML = data.weather[0].description  + ", actual temp: " + Math.round(data.main.temp) + "<br>";
             lastUpdate.innerHTML = momentWithCorrectUtcOffset(new Date()).format(timeFormat) + "/" + momentWithCorrectUtcOffset(new Date(data.dt * 1000)).format(timeFormat);
 
             date.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
@@ -288,8 +288,10 @@
             } else {
                 windString = "huge wind omg die";
             }
-            sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-                    + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
+            sun.innerHTML = data.wind.speed + " " + windString;
+            sun.innerHTML += "<img height=\"20\" src=\"css\\\lowestwind.png\">"
+            //sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
+            //        + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
             Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
                     + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
             Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
