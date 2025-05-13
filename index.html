@@ -240,7 +240,7 @@
             //console.log(JSON.stringify(data.current));
 
             // Get current UVI
-            description.innerHTML += ", uv " + data.current.uvi;
+            document.getElementById("UVcaption").innerHTML = "uv " + data.current.uvi;
             navigator.clipboard.writeText("UV and wind" + JSON.stringify(data));
 
             // Get UVI and wind gusts for the future forecasts
@@ -269,11 +269,21 @@
             // Finds matching entry in data hourly
             for (let j = 0; j < data.hourly.length; j++) {
                 if (data.hourly[j].dt*1000 == currentDate.getTime()) {
-                    description.innerHTML += ", wind gusts " + data.hourly[j].wind_gust;
+                    if (getEnglishInterpretationWind(data.hourly[j].wind_gust) != windDescription) {
+                        description.innerHTML += ", wind gusts " + getEnglishInterpretationWind(data.hourly[j].wind_gust);
+                    }
                 }
             }
-            }
+        }
 
+        function compareToYesterdaysWeather() {
+            // find yesterday's high
+
+            // compare to today's high
+
+            // display string
+        }
+        
         function processActualWeather(data) {
             dataTimeZone = data.timezone
 
@@ -286,21 +296,39 @@
             icon.style.webkitTransform = null;
             temp.innerHTML = feelsLike ? Math.round(data.main.feels_like): Math.round(data.main.temp);
             temp.className = feelsLike ? "feelsLike" : "";
-            city.innerHTML = data.name;
-            description.innerHTML = data.weather[0].description  + ", actual temp: " + Math.round(data.main.temp) + "<br>";
+            // Don't need to show location
+            // city.innerHTML = data.name;
+            city.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
+            description.innerHTML = data.weather[0].description;
+            // removing actual temp for now in favor of feels like
+            //description.innerHTML += ", actual temp: " + Math.round(data.main.temp) + "<br>";
             lastUpdate.innerHTML = momentWithCorrectUtcOffset(new Date()).format(timeFormat) + "/" + momentWithCorrectUtcOffset(new Date(data.dt * 1000)).format(timeFormat);
 
-            date.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
+            //date.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
 
             var sunrise = momentWithCorrectUtcOffset(new Date(data.sys.sunrise * 1000));
             var sunset = momentWithCorrectUtcOffset(new Date(data.sys.sunset * 1000));
 
             _sunriseHour = sunrise.hour();
             _sunsetHour = sunset.hour();
-            
-            var windSpeed = data.wind.speed;
-            var windString = "no idea";
+            windDescription = getEnglishInterpretationWind(data.wind.speed);
+            sun.innerHTML = data.wind.speed + " " + windDescription;
+            description.innerHTML += "<br>" + windDescription;
+            //sun.innerHTML += "<img height=\"20\" src=\"css\\\lowestwind.png\">"
+            //sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
+            //        + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
+            // This HTML does display but omitting because noisy
+            /*Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
+                    + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat); */
+            // This HTML does not display for some reason
+            //    Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
+            //  alert(data.name);
+            setNightMode();
+            setMoonIconsRotation(data.coord.lat)
+        }
 
+        function getEnglishInterpretationWind(windSpeed) {
+            var windString = "";
             if (windSpeed < 6) {
                 windString = "light to no wind";
             } else if (windSpeed < 8) {
@@ -312,18 +340,7 @@
             } else {
                 windString = "huge wind omg die";
             }
-            sun.innerHTML = data.wind.speed + " " + windString;
-            sun.innerHTML += "<img height=\"20\" src=\"css\\\lowestwind.png\">"
-            //sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-            //        + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
-            // This HTML does display but omitting because noisy
-            /*Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-                    + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat); */
-            // This HTML does not display for some reason
-            //    Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
-            //  alert(data.name);
-            setNightMode();
-            setMoonIconsRotation(data.coord.lat)
+            return windString;
         }
 
         /**
@@ -382,6 +399,7 @@
         var icon = null;
         var city = null;
         var description = null;
+        var windDescription = "";
         var lastUpdate = null;
         var date = null;
         var sun = null;
@@ -686,13 +704,12 @@
 <div id="page">
     <a id="city" href="./config.html"></a>
     <div id="iconWrapper"><i id="icon"></i></div>
-    <div id="iconWrapperForUV">
-        <figure style="display:inline-block">
+    <div id="iconWrapperForUV" width="30%">
+        <figure style="display:inline-block" width="30%">
             <img src="css\\\whitesunpng.png" width="30%" style="vertical-align:top"/>
         <!-- trying to do https://stackoverflow.com/questions/19138758/how-to-align-caption-underneath-image  -->
-           <figcaption style="font-size:24em; color:white; text-align: center">Second image<img src="css\\\whitesunpng.png" width="10%" style="vertical-align:top"/></figcaption>
+           <figcaption id="UVcaption" width="30%" style="font-size:12em; color:white; text-align:center">Second image</figcaption>
        </figure>
-       <!-- <img id="UVicon" src="css\\\whitesunpng.png\" width="30%" display="inline-block" right="0">UV 2.5 -->
     </div>
     <div class="tempWrapper">
         <div id="temp"></div>
