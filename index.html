@@ -127,6 +127,7 @@
             var weatherId = data.weather[0].id;
             var weatherString = "";
             // based on this https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+            // todo need to map with https://erikflowers.github.io/weather-icons/
             if (weatherId>800) {
                 weatherString = "cloudy";
             } else if (weatherId == 800) {
@@ -283,7 +284,7 @@
 
             // display string
         }
-        
+
         function processActualWeather(data) {
             dataTimeZone = data.timezone
 
