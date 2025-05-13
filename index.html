@@ -109,7 +109,8 @@
                 var feelsLike = tempType == "feelsLike";
 
                 forecastsCells[i].temp.innerHTML = (feelsLike ? Math.round(forecast.main.feels_like) : Math.round(forecast.main.temp)) + unitsSymbolHtml;
-                forecastsCells[i].icon.className = getIconClassName(forecast.weather[0], new Date(forecast.dt * 1000));
+                console.log("forecast data " + JSON.stringify(forecast))
+                forecastsCells[i].icon.className = getIconClassName(forecast, new Date(forecast.dt * 1000));
                 forecastsCells[i].desc.innerHTML = forecast.weather[0].description;
                 forecastsCells[i].time.innerHTML = momentWithCorrectUtcOffset(new Date(forecast.dt * 1000)).format(timeFormat);
                 forecastsCells[i].temp.className = feelsLike ? "colTemp feelsLike" : "colTemp";
@@ -121,16 +122,41 @@
             setMoonIconsRotation(data.city.coord.lat)
         }
 
-        function getIconClassName(weather, date) {
-            var isNight = weather.icon.slice(-1) === "n";
-            if (isNight && weather.id == 800) {
+        function getIconClassName(data, date) {
+            var isNight = data.weather[0].icon.slice(-1) === "n";
+            var weatherId = data.weather[0].id;
+            var weatherString = "";
+            // based on this https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+            if (weatherId>800) {
+                weatherString = "cloudy";
+            } else if (weatherId == 800) {
+                weatherString = "sunny"
+            } else if (weatherId >= 700) {
+                weatherString = "todo";
+            } else if (weatherId >=600) {
+                weatherString = "snow"
+            } else if (weatherId >= 500) {
+                weatherString = "rain";
+            } else if (weatherId >= 300) {
+                weatherString = "drizzle"
+            }
+            var iconName = "wi wi-" + (isNight ? "night-" : "day-") + weatherString;
+            if (isNight && data.weather[0].id == 800) {
                 // Night clear -> real moon phase icon.
                 var phase = getMoonPhaseFromDate(date);
-                var icon = getMoonIconClasses(phase, isNightMode());
-                return icon;
+                iconName = getMoonIconClasses(phase, isNightMode());
+                return iconName;
             }
-
-            return "wi wi-owm-" + (isNight ? "night-" : "day-") + weather.id;
+            if (data.wind!= null && data.wind.speed>=10) {
+                iconName += "-windy";
+                console.log("should be windy icon");
+            } else if (data.wind== null) {
+                console.log("wind was null " + data.toString());
+            } else if (data.wind.speed<10) {
+                console.log("low wind so no icon");
+            }
+            console.log("icon name " + iconName);
+            return iconName;
         }
 
         function setsUnitsSymbolFromApiUrl(url) {
@@ -211,7 +237,7 @@
         };
 
         function processUVAndWindGusts(data) {
-            console.log(JSON.stringify(data.current));
+            //console.log(JSON.stringify(data.current));
 
             // Get current UVI
             description.innerHTML += ", uv " + data.current.uvi;
@@ -238,14 +264,10 @@
             var currentDate = new Date();
             currentDate.setHours(currentDate.getHours() + Math.round(currentDate.getMinutes()/60));
             currentDate.setMinutes(0, 0, 0); // Resets also seconds and milliseconds
-            console.log ("nearest hour " + currentDate.getTime());
             // Finds matching entry in data hourly
             for (let j = 0; j < data.hourly.length; j++) {
                 if (data.hourly[j].dt*1000 == currentDate.getTime()) {
-                    console.log("date match at entry " + j + " and wind gusts " + data.hourly[j].wind_gust)
                     description.innerHTML += ", wind gusts " + data.hourly[j].wind_gust;
-                } else {
-                    console.log("no match for " + j + " because  "+ currentDate.getTime()  + "and comparied" + data.hourly[j].dt*1000);
                 }
             }
             }
@@ -257,10 +279,10 @@
             //alert (JSON.stringify(data));
             navigator.clipboard.writeText("2.5 " + JSON.stringify(data));
 
-            icon.className = getIconClassName(data.weather[0], new Date(data.dt * 1000));
+            icon.className = getIconClassName(data, new Date(data.dt * 1000));
             icon.style.transform = null;
             icon.style.webkitTransform = null;
-            temp.innerHTML = feelsLike ? "fl " + Math.round(data.main.feels_like): Math.round(data.main.temp);
+            temp.innerHTML = feelsLike ? Math.round(data.main.feels_like): Math.round(data.main.temp);
             temp.className = feelsLike ? "feelsLike" : "";
             city.innerHTML = data.name;
             description.innerHTML = data.weather[0].description  + ", actual temp: " + Math.round(data.main.temp) + "<br>";
