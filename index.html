@@ -254,7 +254,9 @@
                     var timeInArray = (data.hourly[j].dt)*1000;
                     if (timeToReference == timeInArray) {
                         console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
-                        forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust + " uv " + data.hourly[j].uvi
+                        // omitting gusts for now because it should be in icon
+                        // forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust;
+                        forecastsCells[i].desc.innerHTML += "<br>uv " + data.hourly[j].uvi;
                     }
                 }
             }
@@ -314,9 +316,11 @@
             sun.innerHTML += "<img height=\"20\" src=\"css\\\lowestwind.png\">"
             //sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
             //        + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
-            Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-                    + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
-            Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
+            // This HTML does display but omitting because noisy
+            /*Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
+                    + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat); */
+            // This HTML does not display for some reason
+            //    Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
             //  alert(data.name);
             setNightMode();
             setMoonIconsRotation(data.coord.lat)
@@ -682,12 +686,20 @@
 <div id="page">
     <a id="city" href="./config.html"></a>
     <div id="iconWrapper"><i id="icon"></i></div>
+    <div id="iconWrapperForUV">
+        <figure style="display:inline-block">
+            <img src="css\\\whitesunpng.png" width="30%" style="vertical-align:top"/>
+        <!-- trying to do https://stackoverflow.com/questions/19138758/how-to-align-caption-underneath-image  -->
+           <figcaption style="font-size:24em; color:white; text-align: center">Second image<img src="css\\\whitesunpng.png" width="10%" style="vertical-align:top"/></figcaption>
+       </figure>
+       <!-- <img id="UVicon" src="css\\\whitesunpng.png\" width="30%" display="inline-block" right="0">UV 2.5 -->
+    </div>
     <div class="tempWrapper">
         <div id="temp"></div>
         <!--<i class="celsius wi wi-celsius"></i>-->
     </div>
     <div id="description"></div>
-    <div id="AngiesStuff">hi This is Angie1</div>
+    <div id="AngiesStuff"></div>
     <div class="AngiesStuff">hi This is Angie1class</div>
     <div id="lastUpdate"></div>
     <div class="forecast">

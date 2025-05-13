@@ -93,7 +93,16 @@ html.night {
     left: 5%;
     top: 8.5%;
 }
+#icon {
+    font-size: 250px;
+    font-size: 35rem;
+}
 
+#iconWrapperForUV {
+    position: absolute;
+    display: inline-block;
+    top: 8.5%;
+}
 .forecast {
     position: absolute;
     width: 100%;
