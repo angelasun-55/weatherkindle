@@ -12,7 +12,6 @@
 
     <script type="text/javascript">
         var apiProtocol = window.location.protocol === 'file:' ? 'https:' : window.location.protocol;
-        var displayedTimestamps = [];
         var jsonp = function () {
             return {
                 // JSONP Request
@@ -80,6 +79,7 @@
             }, "AngiesStuffNoID");
             jsonp.request(apiProtocol + "//api.openweathermap.org/data/3.0/onecall?" + _apiParams + "&callback=jsonp.response" + "&_timestamp=" + (new Date()).getTime()
             , function (data) {
+                alert ("erwr22e");
                 processUVAndWindGusts(data);
             }, "AngiesStuffNoID2");      
       
@@ -115,7 +115,6 @@
                 forecastsCells[i].temp.className = feelsLike ? "colTemp feelsLike" : "colTemp";
                 forecastsCells[i].icon.style.transform = null;
                 forecastsCells[i].icon.style.webkitTransform = null;
-                displayedTimestamps.push(new Date(forecast.dt * 1000));
             }
 
             setMoonIconsRotation(data.city.coord.lat)
@@ -212,32 +211,10 @@
 
         function processUVAndWindGusts(data) {
             console.log(JSON.stringify(data.current));
-
-            // Get current UVI
+            console.log("processed uvi" + data.current.uvi)
             description.innerHTML += ", uv " + data.current.uvi;
             navigator.clipboard.writeText("UV and wind" + JSON.stringify(data));
-
-            // Get UVI for times in the future
-            dataTimeZone = data.timezone
-            dateTimeZoneOffset = data.timezone_offset;
-            forecastsCells[0].desc.innerHTML += " date " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format(timeFormat);
-            console.log(" date 2 " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format("MM/DD/YYYY hh:mm:ss"));
-            forecastsCells[0].desc.innerHTML  += ", gust "+ data.hourly[0].wind_gust + " uv " + data.hourly[0].uvi
-            // forecastsCells[i].time.innerHTML = momentWithCorrectUtcOffset(new Date(forecast.dt * 1000)).format(timeFormat);
-        
-            for (let i = 0; i < displayedTimestamps.length; i++) {
-                var timeToReference = displayedTimestamps[i].getTime();
-                for (let j = 0; j < data.hourly.length; j++) {
-                    var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
-                    if (timeToReference == timeInArray) {
-                        console.log("same time ");
-                    } else {
-                        console.log ("diff time" + timeToReference + " j " + j + " was " + timeInArray);
-                    }
-                }
-            }
-            // Get some wind gusts
-            }
+        }
 
         function processActualWeather(data) {
             dataTimeZone = data.timezone
