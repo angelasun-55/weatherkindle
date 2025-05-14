@@ -29,18 +29,14 @@
 <h1>Kindle Weather Dashboard<br/>Config Page</h1>
 <form action="index.html">
     <div>
-        <label>City: <br/><input type="text" name="city" id="city" /></label>
-    </div>
-    <div>Or GPS:</div>
-    <div>
-        <label>Lat (e.g. 50.123): <input type="text" name="lat" id="lat" /></label>
-        <label>Lon (e.g. 14.4): <input type="text" name="lon" id="lon" /></label>
+        <label>Lat (e.g. 50.123): <input type="text" name="lat" id="lat" value="57.70" /></label>
+        <label>Lon (e.g. 14.4): <input type="text" name="lon" id="lon" value="11.97"/></label>
     </div>
     <div>
         <label>UTC offset: (kindle paperwhite (and maybe some others) doesn't report correct local time to the kindle (always it is GMT/UTC). If times on dashboard are bad, you can set custom offset, like 1, 2, -3 etc. You may need to set it again after winter/summer time change.)<br/>
             <select name="utcOffset" id="utcOffset">
+                <option selected value="local">local - reported by kindle/browser</option>
                 <option value="">default - auto by city or location</option>
-                <option value="local">local - reported by kindle/browser</option>
                 <option value="+01:00">+1 h</option>
                 <option value="-01:00">-1 h</option>
                 <option value="+02:00">+2 h</option>
@@ -74,8 +70,8 @@
         <label>Language: <br/>
             <select name="lang" id="lang">
                 <!-- a;b (a == owm lang, b = moment locale (if different))-->
+                <option selected value="en">English (en)</option>
                 <option value="sk">Slovak (sk)</option>
-                <option value="en">English (en)</option>
                 <option value="af">Afrikaans (af)</option>
                 <option value="al;sq">Albanian (al/sq)</option>
                 <option value="ar">Arabic (ar)</option>
@@ -126,10 +122,10 @@
     <div>
         <label>Rotation: <br/>
             <select name="rotation" id="rotation">
-                <option value="none">None</option>
-                <option value="ll">Landscape Left</option>
+                <option selected value="ll">Landscape Left</option>
                 <option value="lr">Landscape right</option>
                 <option value="up">Upside down</option>
+                <option value="none">None</option>
                 <option value="">default</option>
             </select>
         </label>
@@ -137,8 +133,8 @@
     <div>
         <label>Units: <br/>
             <select name="units" id="units">
+                <option selected value="imperial">Imperial - Fahrenheit</option>
                 <option value="metric">Metric - °C</option>
-                <option value="imperial">Imperial - Fahrenheit</option>
                 <option value="">default</option>
             </select>
         </label>
@@ -146,8 +142,8 @@
     <div>
         <label>Show: <br/>
             <select name="tempType" id="tempType">
+                <option selected value="feelsLike">Feels like temperature</option>
                 <option value="actual">Actual temperature</option>
-                <option value="feelsLike">Feels like temperature</option>
                 <option value="">default</option>
             </select>
         </label>
@@ -155,9 +151,9 @@
     <div>
         <label>Night Mode: <br/>
             <select name="night" id="night">
+                <option selected value="on">always</option>
                 <option value="off">off</option>
                 <option value="auto">sunset - sunrise</option>
-                <option value="on">always</option>
                 <option value="">default</option>
             </select>
         </label>
