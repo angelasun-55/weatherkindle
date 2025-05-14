@@ -205,10 +205,10 @@
             icon.className = getIconClassName(data.weather[0], new Date(data.dt * 1000));
             icon.style.transform = null;
             icon.style.webkitTransform = null;
-            temp.innerHTML = feelsLike ? "fl " + Math.round(data.main.feels_like): Math.round(data.main.temp);
+            temp.innerHTML = feelsLike ? Math.round(data.main.feels_like) : Math.round(data.main.temp);
             temp.className = feelsLike ? "feelsLike" : "";
             city.innerHTML = data.name;
-            description.innerHTML = data.weather[0].description  + ", actual temp: " + Math.round(data.main.temp);
+            description.innerHTML = data.weather[0].description;
             lastUpdate.innerHTML = momentWithCorrectUtcOffset(new Date()).format(timeFormat) + "/" + momentWithCorrectUtcOffset(new Date(data.dt * 1000)).format(timeFormat);
 
             date.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
@@ -220,7 +220,6 @@
             _sunsetHour = sunset.hour();
             
             var windSpeed = data.wind.speed;
-            var windGust = data.wind.gust;
             var windString = "no idea";
 
             if (windSpeed < 6) {
@@ -234,7 +233,6 @@
             } else {
                 windString = "huge wind omg die";
             }
-            windString += "gusts " + windGust;
             sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
                     + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat) +"end of sun";
             Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
