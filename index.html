@@ -249,7 +249,7 @@
             // Get UVI and wind gusts for the future forecasts
             dataTimeZone = data.timezone
             dateTimeZoneOffset = data.timezone_offset;
-
+/*
             for (let i = 0; i < displayedTimestamps.length; i++) {
                 var timeToReference = displayedTimestamps[i].getTime();
                 for (let j = 0; j < data.hourly.length; j++) {
@@ -263,6 +263,7 @@
                     }
                 }
             }
+                */
             // Get UV for nearest hour
 
             //Calculates nearest hour, whether before or after current time
@@ -276,7 +277,7 @@
                         description.innerHTML += ", wind gusts " + getEnglishInterpretationWind(data.hourly[j].wind_gust);
                     }
                 }
-            } 
+            }  
         }
 
         function compareToYesterdaysWeather(data) {
