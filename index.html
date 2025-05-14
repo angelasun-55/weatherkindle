@@ -37,9 +37,9 @@
                         script.id = id;
                         script.src = src;
                         navigator.clipboard.writeText(script.outerHTML);
-//                        console.log(script.outerHTML);
+                        console.log(script.outerHTML);
                         script.onload = function () {
-//                            console.log("onload");
+                            console.log("onload");
                             if (typeof callback !== "undefined") {
                                 callback(self.responseObject);
                             }
@@ -51,8 +51,8 @@
 
                         document.body.appendChild(script);
                     } catch (exception) {
- //                       alert ("exception1 " + exception);
-//                        console.log(exception);
+                        alert ("exception1 " + exception);
+                        console.log(exception);
                     }
                 },
 
@@ -62,8 +62,8 @@
                         this.responseObject = response;
                         //alert("response " + JSON.stringify(response));
                     } catch (exception) {
- //                       alert ("exception2 " + exception);
-   //                     console.log(exception);
+                        alert ("exception2 " + exception);
+                        console.log(exception);
                     }
                 }
             }
@@ -211,7 +211,7 @@
         };
 
         function processUVAndWindGusts(data) {
- //           console.log(JSON.stringify(data.current));
+            console.log(JSON.stringify(data.current));
 
             // Get current UVI
             description.innerHTML += ", uv " + data.current.uvi;
@@ -221,7 +221,7 @@
             dataTimeZone = data.timezone
             dateTimeZoneOffset = data.timezone_offset;
             forecastsCells[0].desc.innerHTML += " date " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format(timeFormat);
- //           console.log(" date 2 " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format("MM/DD/YYYY hh:mm:ss"));
+            console.log(" date 2 " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format("MM/DD/YYYY hh:mm:ss"));
             forecastsCells[0].desc.innerHTML  += ", gust "+ data.hourly[0].wind_gust + " uv " + data.hourly[0].uvi
             // forecastsCells[i].time.innerHTML = momentWithCorrectUtcOffset(new Date(forecast.dt * 1000)).format(timeFormat);
         
@@ -230,9 +230,9 @@
                 for (let j = 0; j < data.hourly.length; j++) {
                     var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
                     if (timeToReference == timeInArray) {
- //                       console.log("same time ");
+                        console.log("same time ");
                     } else {
- //                       console.log ("diff time" + timeToReference + " j " + j + " was " + timeInArray);
+                        console.log ("diff time" + timeToReference + " j " + j + " was " + timeInArray);
                     }
                 }
             }
@@ -473,7 +473,7 @@
         }
 
         window.addEventListener('load', function () {
- //           console.log("load");
+            console.log("load");
 
             _apiParams = getApiParams();
             if (_apiParams === null) {
