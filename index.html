@@ -37,7 +37,7 @@
                         script.id = id;
                         script.src = src;
                        // navigator.clipboard.writeText(script.outerHTML);
-                       console.log(script.outerHTML);
+                       //console.log(script.outerHTML);
                         script.onload = function () {
                             if (typeof callback !== "undefined") {
                                 callback(self.responseObject);
@@ -50,8 +50,8 @@
 
                         document.body.appendChild(script);
                     } catch (exception) {
-                        alert ("exception1 " + exception);
-                        console.log(exception);
+                        //alert ("exception1 " + exception);
+                        //console.log(exception);
                     }
                 },
 
@@ -61,8 +61,8 @@
                         this.responseObject = response;
                         //alert("response " + JSON.stringify(response));
                     } catch (exception) {
-                        alert ("exception2 " + exception);
-                        console.log(exception);
+                        //alert ("exception2 " + exception);
+                        //console.log(exception);
                     }
                 }
             }
@@ -155,11 +155,11 @@
                 iconName += "-windy";
                 // console.log("should be windy icon");
             } else if (data.wind== null) {
-                console.log("wind was null " + data.toString());
+               // console.log("wind was null " + data.toString());
             } else if (data.wind.speed<10) {
                 // console.log("low wind so no icon");
             }
-            console.log("icon name " + iconName);
+            //console.log("icon name " + iconName);
             return iconName;
         }
 
@@ -249,7 +249,7 @@
             // Get UVI and wind gusts for the future forecasts
             dataTimeZone = data.timezone
             dateTimeZoneOffset = data.timezone_offset;
-        
+        /*
             for (let i = 0; i < displayedTimestamps.length; i++) {
                 var timeToReference = displayedTimestamps[i].getTime();
                 for (let j = 0; j < data.hourly.length; j++) {
@@ -276,13 +276,13 @@
                         description.innerHTML += ", wind gusts " + getEnglishInterpretationWind(data.hourly[j].wind_gust);
                     }
                 }
-            }
+            } */
         }
 
         function compareToYesterdaysWeather(data) {
             // find yesterday's high
-            console.log("hi we here");
-            console.log(JSON.stringify(data));
+            //console.log("hi we here");
+            //console.log(JSON.stringify(data));
             // compare to today's high
 
             // display string
