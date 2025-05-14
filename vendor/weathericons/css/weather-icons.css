@@ -1587,6 +1587,18 @@
 .wi-owm-day-804:before {
   content: "\f00c";
 }
+.wi-owm-day-801-windy:before {
+  content: "\f000";
+}
+.wi-owm-day-802-windy:before {
+  content: "\f000";
+}
+.wi-owm-day-803-windy:before {
+  content: "\f000";
+}
+.wi-owm-day-804-windy:before {
+  content: "\f00c";
+}
 .wi-owm-day-900:before {
   content: "\f056";
 }
