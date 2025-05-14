@@ -217,37 +217,26 @@
             description.innerHTML += ", uv " + data.current.uvi;
             navigator.clipboard.writeText("UV and wind" + JSON.stringify(data));
 
-            // Get UVI and wind gusts for the future forecasts
+            // Get UVI for times in the future
             dataTimeZone = data.timezone
             dateTimeZoneOffset = data.timezone_offset;
+            forecastsCells[0].desc.innerHTML += " date " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format(timeFormat);
+            console.log(" date 2 " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format("MM/DD/YYYY hh:mm:ss"));
+            forecastsCells[0].desc.innerHTML  += ", gust "+ data.hourly[0].wind_gust + " uv " + data.hourly[0].uvi
+            // forecastsCells[i].time.innerHTML = momentWithCorrectUtcOffset(new Date(forecast.dt * 1000)).format(timeFormat);
         
             for (let i = 0; i < displayedTimestamps.length; i++) {
                 var timeToReference = displayedTimestamps[i].getTime();
                 for (let j = 0; j < data.hourly.length; j++) {
-                    //var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
-                    var timeInArray = (data.hourly[j].dt)*1000;
+                    var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
                     if (timeToReference == timeInArray) {
-                        console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
-                        forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust + " uv " + data.hourly[j].uvi
+                        console.log("same time ");
+                    } else {
+                        console.log ("diff time" + timeToReference + " j " + j + " was " + timeInArray);
                     }
                 }
             }
-            // Get UV for nearest hour
-
-            //Calculates nearest hour, whether before or after current time
-            var currentDate = new Date();
-            currentDate.setHours(currentDate.getHours() + Math.round(currentDate.getMinutes()/60));
-            currentDate.setMinutes(0, 0, 0); // Resets also seconds and milliseconds
-            console.log ("nearest hour " + currentDate.getTime());
-            // Finds matching entry in data hourly
-            for (let j = 0; j < data.hourly.length; j++) {
-                if (data.hourly[j].dt*1000 == currentDate.getTime()) {
-                    console.log("date match at entry " + j + " and wind gusts " + data.hourly[j].wind_gust)
-                    description.innerHTML += ", wind gusts " + data.hourly[j].wind_gust;
-                } else {
-                    console.log("no match for " + j + " because  "+ currentDate.getTime()  + "and comparied" + data.hourly[j].dt*1000);
-                }
-            }
+            // Get some wind gusts
             }
 
         function processActualWeather(data) {
@@ -275,6 +264,7 @@
             _sunsetHour = sunset.hour();
             
             var windSpeed = data.wind.speed;
+            var windGust = data.wind.gust;
             var windString = "no idea";
 
             if (windSpeed < 6) {
@@ -288,8 +278,9 @@
             } else {
                 windString = "huge wind omg die";
             }
+            windString += "gusts " + windGust;
             sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
-                    + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
+                    + "&nbsp;&nbsp;wind" + data.wind.speed + " " + windString + "<i class='wi wi-sunset'></i> " + sunset.format(timeFormat) +"end of sun";
             Angie1.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
                     + "&nbsp;&nbsp; This is Angie 1<i class='wi wi-sunset'></i> " + sunset.format(timeFormat);
             Angie2.innerHTMl = "<div>sdfsdfsd hi This is Angie 2</div>"
