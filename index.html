@@ -224,15 +224,13 @@
  //           console.log(" date 2 " + momentWithCorrectUtcOffset(new Date((data.hourly[0].dt+dateTimeZoneOffset)*1000)).format("MM/DD/YYYY hh:mm:ss"));
             forecastsCells[0].desc.innerHTML  += ", gust "+ data.hourly[0].wind_gust + " uv " + data.hourly[0].uvi
             // forecastsCells[i].time.innerHTML = momentWithCorrectUtcOffset(new Date(forecast.dt * 1000)).format(timeFormat);
-            var lastFoundIndex = 0;
+        
             for (let i = 0; i < displayedTimestamps.length; i++) {
                 var timeToReference = displayedTimestamps[i].getTime();
-                for (let j = lastFoundIndex; j < data.hourly.length; j++) {
+                for (let j = 0; j < data.hourly.length; j++) {
                     var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
                     if (timeToReference == timeInArray) {
  //                       console.log("same time ");
-                        lastFoundIndex = j;
-                            break;
                     } else {
  //                       console.log ("diff time" + timeToReference + " j " + j + " was " + timeInArray);
                     }
