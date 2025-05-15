@@ -277,7 +277,7 @@
             for (var j = 0; j < data.hourly.length; j++) {
                 if (data.hourly[j].dt*1000 == currentDate.getTime()) {
                     if (getEnglishInterpretationWind(data.hourly[j].wind_gust) != windDescription) {
-                        description.innerHTML += ", wind gusts " + getEnglishInterpretationWind(data.hourly[j].wind_gust);
+                        description.innerHTML += ", gusts " + getEnglishInterpretationWind(data.hourly[j].wind_gust);
                     }
                     break;
                 }
@@ -347,7 +347,7 @@
             } else if (windSpeed < 16) {
                 windString = "very strong wind";
             } else {
-                windString = "huge wind omg die";
+                windString = "omg die 🚳";
             }
             return windString;
         }
