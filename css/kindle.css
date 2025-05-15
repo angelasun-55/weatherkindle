@@ -116,11 +116,11 @@ html.night {
 .forecast {
     position: absolute;
     width: 100%;
-    bottom: 6%;
+    bottom: 0%; 
     left: 0;
     border-top: 5px solid black;
     border-bottom: 1px solid black;
-    height: 39%;
+    height: 45%;
 }
 
 .night .forecast {
@@ -153,11 +153,11 @@ html.night {
 }
 
 #sun {
-    position: absolute;
+   /* position: absolute;
     bottom: 0;
     right: 3.3%;
     font-size: 30px;
-    font-size: 4.3rem;
+    font-size: 4.3rem; */
 }
 
 .forecastIconWrapper {

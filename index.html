@@ -282,8 +282,8 @@
 
         function compareToYesterdaysWeather(data) {
             // find yesterday's high
-            //console.log("hi we here");
-            //console.log(JSON.stringify(data));
+            console.log("hi we here");
+            console.log(JSON.stringify(data));
             // compare to today's high
 
             // display string
@@ -317,7 +317,8 @@
             _sunriseHour = sunrise.hour();
             _sunsetHour = sunset.hour();
             windDescription = getEnglishInterpretationWind(data.wind.speed);
-            sun.innerHTML = data.wind.speed + " " + windDescription;
+            // getting rid of bottom bar with wind / sunset for now because kindle looking crowdedd
+            //sun.innerHTML = data.wind.speed + " " + windDescription;
             description.innerHTML += "<br>" + windDescription;
             //sun.innerHTML += "<img height=\"20\" src=\"css\\\lowestwind.png\">"
             //sun.innerHTML = "<i class='" + getMoonIconClasses(getCurrentMoonPhase(), isNightMode()) + "'></i>&nbsp;&nbsp;<i class='wi wi-sunrise'></i> " + sunrise.format(timeFormat)
@@ -755,7 +756,7 @@
         </div>
     </div>
     <div id="date"></div>
-    <div id="sun"></div>
+  <!--  <div id="sun"></div> -->
     <div id="AngiesStuff2">hi This is Angie2</div>
 </div>
 <div id="cleaner"></div>
