@@ -249,6 +249,7 @@
             
             for (var i = 0; i < displayedTimestamps.length; i++) {
                 var timeToReference = displayedTimestamps[i].getTime();
+                console.log("trying to match " + timeToReference);
                 for (var j = lastFoundIndex; j < data.hourly.length; j++) {
                     //var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
                     var timeInArray = (data.hourly[j].dt)*1000;
