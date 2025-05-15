@@ -274,14 +274,14 @@
             currentDate.setHours(currentDate.getHours() + Math.round(currentDate.getMinutes()/60));
             currentDate.setMinutes(0, 0, 0); // Resets also seconds and milliseconds
             // Finds matching entry in data hourly
-          /*  for (let j = 0; j < data.hourly.length; j++) {
+            for (var j = 0; j < data.hourly.length; j++) {
                 if (data.hourly[j].dt*1000 == currentDate.getTime()) {
                     if (getEnglishInterpretationWind(data.hourly[j].wind_gust) != windDescription) {
                         description.innerHTML += ", wind gusts " + getEnglishInterpretationWind(data.hourly[j].wind_gust);
                     }
                     break;
                 }
-            }   */
+            }   
         }
 
         function compareToYesterdaysWeather(data) {
