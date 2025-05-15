@@ -252,8 +252,9 @@
                 for (var j = lastFoundIndex; j < data.hourly.length; j++) {
                     //var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
                     var timeInArray = (data.hourly[j].dt)*1000;
+                    console.log("time in Array " + timeInArray);
                     if (timeToReference == timeInArray) {
-                        //console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
+                        console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
                         // omitting gusts for now because it should be in icon
                         // forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust;
                         forecastsCells[i].desc.innerHTML += "<br>uv " + data.hourly[j].uvi;
