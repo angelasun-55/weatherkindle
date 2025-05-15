@@ -132,19 +132,19 @@
             // based on this https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
             // todo need to map with https://erikflowers.github.io/weather-icons/
             if (weatherId>800) {
-                weatherString = "cloudy";
+                weatherString = "-cloudy";
             } else if (weatherId == 800) {
-                weatherString = "sunny"
+                weatherString = ""
             } else if (weatherId >= 700) {
-                weatherString = "todo";
+                weatherString = "-todo";
             } else if (weatherId >=600) {
-                weatherString = "snow"
+                weatherString = "-snow"
             } else if (weatherId >= 500) {
-                weatherString = "rain";
+                weatherString = "-rain";
             } else if (weatherId >= 300) {
-                weatherString = "drizzle"
+                weatherString = "-drizzle"
             }
-            var iconName = "wi wi-" + (isNight ? "night-" : "day-") + weatherString;
+            var iconName = "wi wi-" + (isNight ? "night" : "day") + weatherString;
             if (isNight && data.weather[0].id == 800) {
                 // Night clear -> real moon phase icon.
                 var phase = getMoonPhaseFromDate(date);
@@ -153,13 +153,9 @@
             }
             if (data.wind!= null && data.wind.speed>=10) {
                 iconName += "-windy";
-                // console.log("should be windy icon");
-            } else if (data.wind== null) {
-               // console.log("wind was null " + data.toString());
-            } else if (data.wind.speed<10) {
-                // console.log("low wind so no icon");
+            } else if (weatherId==800){
+                iconName += "-sunny";
             }
-            //console.log("icon name " + iconName);
             return iconName;
         }
 
@@ -347,7 +343,7 @@
             } else if (windSpeed < 16) {
                 windString = "very strong wind";
             } else {
-                windString = "omg die 🚳";
+                windString = "omg die";
             }
             return windString;
         }
