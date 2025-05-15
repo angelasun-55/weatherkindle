@@ -252,7 +252,7 @@
             var lastFoundIndex = 0;
             for (let i = 0; i < displayedTimestamps.length; i++) {
                 var timeToReference = displayedTimestamps[i].getTime();
-                for (let j = lastFoundIndex; j < data.hourly.length; j++) {
+               /* for (let j = lastFoundIndex; j < data.hourly.length; j++) {
                     //var timeInArray = (data.hourly[j].dt+dateTimeZoneOffset)*1000;
                     var timeInArray = (data.hourly[j].dt)*1000;
                     if (timeToReference == timeInArray) {
@@ -263,7 +263,7 @@
                         lastFoundIndex = j;
                         break;
                     }
-                }
+                } */
             }
                 
             // Get UV for nearest hour
