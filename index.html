@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="css/kindle.css"/>
 
     <script type="text/javascript">
+        // window.onerror = function(message, url, line, col, errorObj) {
+        // alert(`${message}\n${url}, ${line}:${col}`);
+        // };
         var apiProtocol = window.location.protocol === 'file:' ? 'https:' : window.location.protocol;
         var displayedTimestamps = [];
         var jsonp = function () {
@@ -36,6 +39,7 @@
                         script.type = 'application/javascript';
                         script.id = id;
                         script.src = src;
+                        script.crossOrigin = 'anonymous';
                        // navigator.clipboard.writeText(script.outerHTML);
                        //console.log(script.outerHTML);
                         script.onload = function () {
@@ -50,8 +54,8 @@
 
                         document.body.appendChild(script);
                     } catch (exception) {
-                        //alert ("exception1 " + exception);
-                        //console.log(exception);
+                        // alert ("exception1 " + exception);
+                        // console.error(exception);
                     }
                 },
 
@@ -62,7 +66,7 @@
                         //alert("response " + JSON.stringify(response));
                     } catch (exception) {
                         //alert ("exception2 " + exception);
-                        //console.log(exception);
+                        //console.error(exception);
                     }
                 }
             }
@@ -82,10 +86,9 @@
                 compareToYesterdaysWeather(data);
             }, "AngiesStuffNoID");
             jsonp.request(apiProtocol + "//api.openweathermap.org/data/3.0/onecall?" + _apiParams + "&callback=jsonp.response" + "&_timestamp=" + (new Date()).getTime()
-            , function (data) {
-                processUVAndWindGusts(data);
-            }, "AngiesStuffNoID2");      
-      
+             , function (data) {
+                 processUVAndWindGusts(data);
+             }, "AngiesStuffNoID2");      
         }
 
         function refreshForecastWeather() {
@@ -240,7 +243,7 @@
             //console.log(JSON.stringify(data.current));
 
             // Get current UVI
-            document.getElementById("UVcaption").innerHTML = data.current.uvi;
+            document.getElementById("UVcaption").innerHTML = Math.round(data.current.uvi*10)/10;
 
             // Get UVI and wind gusts for the future forecasts
             dataTimeZone = data.timezone
@@ -258,7 +261,7 @@
                         //console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
                         // omitting gusts for now because it should be in icon
                         // forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust;
-                        forecastsCells[i].desc.innerHTML += "<br>uv " + data.hourly[j].uvi;
+                        forecastsCells[i].desc.innerHTML += "<br>uv " + Math.round(data.hourly[j].uvi*10)/10;
                         lastFoundIndex = j;
                         break;
                     } 

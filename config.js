@@ -26,5 +26,5 @@ var night_mode = "on";
 var utcOffset = null;
 
 // Adding feels temp
-var tempType = feelsLike;
+// var tempType = feelsLike;
 
