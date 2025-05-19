@@ -100,9 +100,8 @@
 
         function refreshData() {
             setNightMode();
-            refreshActualWeather();
             refreshForecastWeather();
-
+            refreshActualWeather();
             window.setTimeout("refreshData()", refreshTime);
         }
 
