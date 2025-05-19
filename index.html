@@ -116,7 +116,7 @@
                 forecastsCells[i].temp.innerHTML = (feelsLike ? Math.round(forecast.main.feels_like) : Math.round(forecast.main.temp)) + unitsSymbolHtml;
                 // console.log("forecast data " + JSON.stringify(forecast))
                 forecastsCells[i].icon.className = getIconClassName(forecast, new Date(forecast.dt * 1000));
-                forecastsCells[i].desc.innerHTML = forecast.weather[0].description;
+                // forecastsCells[i].desc.innerHTML = forecast.weather[0].description + "<br>";
                 forecastsCells[i].time.innerHTML = momentWithCorrectUtcOffset(new Date(forecast.dt * 1000)).format(timeFormat);
                 forecastsCells[i].temp.className = feelsLike ? "colTemp feelsLike" : "colTemp";
                 forecastsCells[i].icon.style.transform = null;
@@ -260,7 +260,7 @@
                         //console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
                         // omitting gusts for now because it should be in icon
                         // forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust;
-                        forecastsCells[i].desc.innerHTML += "<br>uv " + Math.round(data.hourly[j].uvi*10)/10;
+                        forecastsCells[i].desc.innerHTML += "uv " + Math.round(data.hourly[j].uvi*10)/10;
                         lastFoundIndex = j;
                         break;
                     } 

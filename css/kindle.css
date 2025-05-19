@@ -111,7 +111,7 @@ html.night {
 
 #iconWrapperForUV p {
     text-align: center;
-    font-size: 3em;
+    font-size: 10em;
 }
 .forecast {
     position: absolute;
@@ -240,7 +240,7 @@ html.night {
 
 .landscape .colDesc {
     font-size: 14.2px;
-    font-size: 2.8rem;
+    font-size: 4rem;
 }
 
 .landscape .col {
