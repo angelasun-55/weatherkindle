@@ -260,7 +260,7 @@
                         //console.log("same time " + timeToReference + " so updating forecast cell " + i + " with data from hour " + j) ;
                         // omitting gusts for now because it should be in icon
                         // forecastsCells[i].desc.innerHTML  += ", gust "+ data.hourly[j].wind_gust;
-                        forecastsCells[i].desc.innerHTML += "uv " + Math.round(data.hourly[j].uvi*10)/10;
+                        forecastsCells[i].desc.innerHTML = "uv " + Math.round(data.hourly[j].uvi*10)/10;
                         lastFoundIndex = j;
                         break;
                     } 
