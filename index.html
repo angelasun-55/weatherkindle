@@ -154,7 +154,11 @@
                 return iconName;
             }
             if (data.wind!= null && data.wind.speed>=10) {
-                iconName += "-windy";
+                if (weatherId<600 && weatherId >=500) {
+                    iconName+= "-wind";
+                } else {
+                    iconName += "-windy";
+                }
             } else if (weatherId==800){
                 iconName += "-sunny";
             }
