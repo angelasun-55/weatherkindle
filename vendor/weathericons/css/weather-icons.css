@@ -24,7 +24,7 @@
 /*  src: url('../font/weathericons-regular-webfont.eot');
   src: url('../font/weathericons-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../font/weathericons-regular-webfont.woff2') format('woff2'), url('../font/weathericons-regular-webfont.woff') format('woff'), url('../font/weathericons-regular-webfont.ttf') format('truetype'), url('../font/weathericons-regular-webfont.svg#weather_iconsregular') format('svg');
 */
-  src: url('../font/AngieModd.ttf');
+  src: url('../font/AngieModd.woff2'), url('../font/AngieModd.ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -306,7 +306,7 @@
   content: "\f017";
 }
 .wi-rain-wind:before {
-  content: "\f018";
+  content: "\f00f";
 }
 .wi-showers:before {
   content: "\f01a";

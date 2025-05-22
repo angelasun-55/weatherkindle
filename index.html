@@ -128,6 +128,8 @@
         }
 
         function getIconClassName(data, date) {
+            var clouds = data.clouds.all;
+
             var isNight = data.weather[0].icon.slice(-1) === "n";
             var weatherId = data.weather[0].id;
             var weatherString = "";
@@ -146,7 +148,13 @@
             } else if (weatherId >= 300) {
                 weatherString = "-drizzle"
             }
-            var iconName = "wi wi-" + (isNight ? "night" : "day") + weatherString;
+            var iconName = "wi wi";
+            if (isNight) {
+                iconName+= "-night"
+            } else if (clouds<40) {
+                iconName += "-day"
+            }
+            iconName += weatherString;
             if (isNight && data.weather[0].id == 800) {
                 // Night clear -> real moon phase icon.
                 var phase = getMoonPhaseFromDate(date);
@@ -247,7 +255,7 @@
 
             // Get current UVI
             document.getElementById("UVcaption").innerHTML = Math.round(data.current.uvi*10)/10;
-
+            var cloudsPercent = data.current.clouds;
             // Get UVI and wind gusts for the future forecasts
             dataTimeZone = data.timezone
             dateTimeZoneOffset = data.timezone_offset;
@@ -303,7 +311,6 @@
             var feelsLike = tempType == "feelsLike";
             //alert (JSON.stringify(data));
             //navigator.clipboard.writeText("2.5 " + JSON.stringify(data));
-
             icon.className = getIconClassName(data, new Date(data.dt * 1000));
             icon.style.transform = null;
             icon.style.webkitTransform = null;
