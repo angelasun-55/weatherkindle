@@ -145,7 +145,7 @@
             } else if (weatherId >= 500) {
                 weatherString = "-rain";
             } else if (weatherId >= 300) {
-                weatherString = "-drizzle"
+                weatherString = "-rain"
             }
             var iconName = "wi wi";
             if (isNight) {
@@ -161,7 +161,7 @@
                 return iconName;
             }
             if (data.wind!= null && data.wind.speed>=10) {
-                if (weatherId<600 && weatherId >=500) {
+                if (weatherId<600 && weatherId >=300) {
                     iconName+= "-wind";
                 } else {
                     iconName += "-windy";
