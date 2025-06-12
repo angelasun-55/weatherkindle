@@ -317,11 +317,11 @@
             temp.className = feelsLike ? "feelsLike" : "";
             // Don't need to show location
             // city.innerHTML = data.name;
-            city.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
+            city.innerHTML = "Updated "  + momentWithCorrectUtcOffset(new Date()).format("dd hh:mm");
             description.innerHTML = data.weather[0].description;
             // removing actual temp for now in favor of feels like
             //description.innerHTML += ", actual temp: " + Math.round(data.main.temp) + "<br>";
-            lastUpdate.innerHTML = momentWithCorrectUtcOffset(new Date()).format(timeFormat) + "/" + momentWithCorrectUtcOffset(new Date(data.dt * 1000)).format(timeFormat);
+            //lastUpdate.innerHTML = momentWithCorrectUtcOffset(new Date()).format(timeFormat) + "/" + momentWithCorrectUtcOffset(new Date(data.dt * 1000)).format(timeFormat);
 
             //date.innerHTML = momentWithCorrectUtcOffset(new Date()).format("dd, ll");
 
