@@ -139,7 +139,11 @@
             } else if (weatherId == 800) {
                 weatherString = ""
             } else if (weatherId >= 700) {
-                weatherString = "-todo";
+                if (weatherId == 701) {
+
+                } else {
+                    weatherString = "-todo" + weatherId;
+                }
             } else if (weatherId >=600) {
                 weatherString = "-snow"
             } else if (weatherId >= 500) {

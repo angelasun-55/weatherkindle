@@ -8,6 +8,12 @@
 .wi-day-snow-windy:before{
     content:"\f065";
 }
+.wi-mist-windy:before{
+    content:"\f089";
+}
+.wi-mist:before{
+    content:"\f01c";
+}
 
 .wi-owm-day-201:before {
     content: "\f01e";
