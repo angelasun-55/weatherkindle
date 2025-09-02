@@ -80,10 +80,11 @@
                 }, "actual");
 
                 //todo day summmary does not work
+                /*
                 jsonp.request(apiProtocol + "//api.openweathermap.org/data/3.0/onecall/day_summary?" + _apiParams + "&date=2025-05-12&callback=jsonp.response" + "&_timestamp=" + (new Date()).getTime()
             , function (data) {
                 compareToYesterdaysWeather(data);
-            }, "AngiesStuffNoID");
+            }, "AngiesStuffNoID"); */
             jsonp.request(apiProtocol + "//api.openweathermap.org/data/3.0/onecall?" + _apiParams + "&callback=jsonp.response" + "&_timestamp=" + (new Date()).getTime()
              , function (data) {
                  processUVAndWindGusts(data);
@@ -302,7 +303,7 @@
         function compareToYesterdaysWeather(data) {
             // find yesterday's high
             console.log("hi we here");
-            console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             // compare to today's high
 
             // display string
