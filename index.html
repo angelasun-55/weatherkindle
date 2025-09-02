@@ -100,7 +100,7 @@
 
         function refreshData() {
             setNightMode();
-            /*refreshForecastWeather();
+            refreshForecastWeather(); /*
             refreshActualWeather();
             window.setTimeout("refreshData()", refreshTime);  */
         }
@@ -113,7 +113,7 @@
 
                 var feelsLike = tempType == "feelsLike";
 
-                forecastsCells[i].temp.innerHTML = (feelsLike ? Math.round(forecast.main.feels_like) : Math.round(forecast.main.temp)) + unitsSymbolHtml;
+               /* forecastsCells[i].temp.innerHTML = (feelsLike ? Math.round(forecast.main.feels_like) : Math.round(forecast.main.temp)) + unitsSymbolHtml;
                 // console.log("forecast data " + JSON.stringify(forecast))
                 forecastsCells[i].icon.className = getIconClassName(forecast, new Date(forecast.dt * 1000));
                 // forecastsCells[i].desc.innerHTML = forecast.weather[0].description + "<br>";
@@ -122,6 +122,7 @@
                 forecastsCells[i].icon.style.transform = null;
                 forecastsCells[i].icon.style.webkitTransform = null;
                 displayedTimestamps.push(new Date(forecast.dt * 1000));
+                */
             }
 
             setMoonIconsRotation(data.city.coord.lat)
