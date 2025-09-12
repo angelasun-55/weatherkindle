@@ -94,7 +94,7 @@
         function refreshForecastWeather() {
             jsonp.request(apiProtocol + "//api.openweathermap.org/data/2.5/forecast?" + _apiParams + "&callback=jsonp.response" + "&_timestamp=" + (new Date()).getTime()
                 , function (data) {
-                    //processForecastWeather(data);
+                    processForecastWeather(data);
                 }, "forecast");
         }
 
